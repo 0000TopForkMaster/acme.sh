@@ -6509,7 +6509,7 @@ installOnline() {
 
   _branch="$BRANCH"
   if [ -z "$_branch" ]; then
-    _branch="master"
+    _branch="le-still-default"
   fi
 
   target="$PROJECT/archive/$_branch.tar.gz"
