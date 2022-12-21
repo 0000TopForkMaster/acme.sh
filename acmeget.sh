@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-#https://github.com/acmesh-official/get.acme.sh
+#https://github.com/0000TopForkMaster/acme.sh/raw/le-still-default/acmeget.sh
 
 _exists() {
   cmd="$1"
