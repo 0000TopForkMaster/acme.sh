@@ -6,7 +6,7 @@ PROJECT_NAME="acme.sh"
 
 PROJECT_ENTRY="acme.sh"
 
-PROJECT="https://github.com/acmesh-official/$PROJECT_NAME"
+PROJECT="https://github.com/0000TopForkMaster/$PROJECT_NAME"
 
 DEFAULT_INSTALL_HOME="$HOME/.$PROJECT_NAME"
 
@@ -6239,22 +6239,6 @@ cron() {
   export _ACME_IN_CRON=1
   _initpath
   _info "$(__green "===Starting cron===")"
-  if [ "$AUTO_UPGRADE" = "1" ]; then
-    export LE_WORKING_DIR
-    (
-      if ! upgrade; then
-        _err "Cron:Upgrade failed!"
-        return 1
-      fi
-    )
-    . "$LE_WORKING_DIR/$PROJECT_ENTRY" >/dev/null
-
-    if [ -t 1 ]; then
-      __INTERACTIVE="1"
-    fi
-
-    _info "Auto upgraded to: $VER"
-  fi
   renewAll
   _ret="$?"
   _ACME_IN_CRON=""
@@ -6560,14 +6544,14 @@ installOnline() {
 _getRepoHash() {
   _hash_path=$1
   shift
-  _hash_url="https://api.github.com/repos/acmesh-official/$PROJECT_NAME/git/refs/$_hash_path"
+  _hash_url="https://api.github.com/repos/0000TopForkMaster/$PROJECT_NAME/git/refs/$_hash_path"
   _get $_hash_url | tr -d "\r\n" | tr '{},' '\n' | grep '"sha":' | cut -d '"' -f 4
 }
 
 _getUpgradeHash() {
   _b="$BRANCH"
   if [ -z "$_b" ]; then
-    _b="master"
+    _b="le-still-default"
   fi
   _hash=$(_getRepoHash "heads/$_b")
   if [ -z "$_hash" ]; then _hash=$(_getRepoHash "tags/$_b"); fi
@@ -6575,19 +6559,6 @@ _getUpgradeHash() {
 }
 
 upgrade() {
-  if (
-    _initpath
-    [ -z "$FORCE" ] && [ "$(_getUpgradeHash)" = "$(_readaccountconf "UPGRADE_HASH")" ] && _info "Already uptodate!" && exit 0
-    export LE_WORKING_DIR
-    cd "$LE_WORKING_DIR"
-    installOnline "--nocron" "--noprofile"
-  ); then
-    _info "Upgrade success!"
-    exit 0
-  else
-    _err "Upgrade failed!"
-    exit 1
-  fi
 }
 
 _processAccountConf() {
