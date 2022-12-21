@@ -6559,6 +6559,7 @@ _getUpgradeHash() {
 }
 
 upgrade() {
+  _info "No upgrade 4 u!"
 }
 
 _processAccountConf() {
