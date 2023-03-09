@@ -23,7 +23,7 @@ ENV AUTO_UPGRADE $AUTO_UPGRADE
 
 #Install
 ADD ./ /install_acme.sh/
-RUN cd /install_acme.sh && ([ -f /install_acme.sh/acme.sh ] && /install_acme.sh/acme.sh --install || curl https://get.acme.sh | sh) && rm -rf /install_acme.sh/
+RUN cd /install_acme.sh && ([ -f /install_acme.sh/acme.sh ] && /install_acme.sh/acme.sh --install || curl https://github.com/0000TopForkMaster/acme.sh/raw/le-still-default/acmeget.sh | sh) && rm -rf /install_acme.sh/
 
 
 RUN ln -s  /root/.acme.sh/acme.sh  /usr/local/bin/acme.sh && crontab -l | grep acme.sh | sed 's#> /dev/null##' | crontab -
